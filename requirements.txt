@@ -1,0 +1,4 @@
+flask
+htmlmin
+rcssmin
+rjsmin
