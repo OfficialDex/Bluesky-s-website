@@ -1,1 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bluesky Airways</title>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  background: #f0f0f0;
+  min-height: 400vh; /* makes page scrollable */
+}
+
+    .slideshow {
+  position: relative;
+  width: 100%;
+  height: 300px; /* increase height so overlay and button have space */
+  overflow: visible;
+}
+
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .shadow-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+      pointer-events: none;
+    }
+
+    .top-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* 300px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 10px;
+  z-index: 10;
+  gap: 12px; /* space between elements */
+}
+
+
+    .top-center-image {
+      width: 170px;
+      height: auto;
+      opacity: 0;
+      animation: fadeIn 4s forwards;
+    }
+
+    .welcome-text {
+      font-size: 24px;
+      margin-top: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      animation: textFadeIn 4s forwards;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes textFadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .silver-gradient {
+      background: linear-gradient(90deg, #ccc, #fff, #ccc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: silverShift 5s infinite alternate ease-in-out;
+    }
+
+    .blue-gradient {
+      background: linear-gradient(90deg, #0047AB, #00AEEF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: blueShift 5s infinite alternate ease-in-out;
+    }
+
+    @keyframes silverShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @keyframes blueShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .subtitle-container {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 10px;
+      text-align: center;
+      line-height: 1.3;
+      display: inline-block;
+      max-width: 90%;
+    }
+
+    .subtitle-text {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .gradient-red {
+      background: linear-gradient(90deg, #ff6b81, #ff0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s infinite alternate ease-in-out;
+    }
+
+    .gradient-gold {
+      background: linear-gradient(90deg, #ffd700, #ffff00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s infinite alternate ease-in-out;
+    }
+
+    .gradient-pink {
+      background: linear-gradient(90deg, #ff69b4, #ff1493);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s infinite alternate ease-in-out;
+    }
+
+    .gradient-green {
+      background: linear-gradient(90deg, #00ff7f, #008000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s infinite alternate ease-in-out;
+    }
+
+    .gradient-purple {
+      background: linear-gradient(90deg, #8000ff, #d300ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s infinite alternate ease-in-out;
+    }
+
+    .gradient-blue {
+      background: linear-gradient(90deg, #1e90ff, #00bfff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s infinite alternate ease-in-out;
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* Capsule Button */
+.capsule-button {
+    position: absolute;
+    bottom: -18px; /* half of new height for equal distribution */
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    transform-origin: center;
+    padding: 6px 40px; /* thinner vertical padding */
+    background: linear-gradient(90deg, #00AEEF, #0047AB);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    animation: buttonFadeBounce 2s forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* removes blue flash */
+}
+
+.capsule-button:hover {
+    transform: translateX(-50%) scale(4.95); /* noticeably bigger */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+.capsule-button:active {
+    transform: translateX(-50%) scale(1.15); /* slightly smaller on click but bigger than normal */
+    background: linear-gradient(90deg, #00AEEF, #0047AB);
+}
+
+
+    @keyframes buttonFadeBounce {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(5px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+    
+.below-button-title {
+  margin-top: 60px;   /* enough gap from button */
+  margin-bottom: 20px; /* smaller gap before info box */
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+
+  background: linear-gradient(90deg, #b0b0b0, #d9d9d9, #0047AB);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  opacity: 0;
+  animation: fadeIn 3s ease forwards, silverBlueShift 6s infinite alternate ease-in-out;
+  animation-delay: 0s, 3s;
+}
+
+@keyframes silverBlueShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.info-container {
+  margin: 0 auto;   /* removes huge top margin */
+  margin-top: 20px; /* just enough under the title */
+  width: 80%;
+  max-width: 700px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 20px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 2.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+   box-shadow: 0 8px 20px rgba(0, 120, 255, 0.6); /* calm blue shadow */
+  transition: 
+    box-shadow 0.4s cubic-bezier(.23,1,.32,1), /* smooth shadow animation */
+    transform 0.4s cubic-bezier(.23,1,.32,1);  /* smooth grow animation */
+}
+
+.info-container.visible {
+  opacity: 1;
+  transform: scale(1);
+  animation: popBounce 0.8s;
+}
+
+.info-container:hover,
+.info-container:active {
+  transform: scale(1.07); /* grows box up on hover/click */
+  box-shadow: 0 16px 40px rgba(0,180,255, 0.9); /* brighter blue, more spread */
+}
+
+.info-image {
+  width: 100%;          /* full width of container */
+  max-height: 150px;    /* limit how tall it gets */
+  object-fit: cover;    /* crops it to look rectangular */
+  display: block;
+  border-bottom: 1px solid #ddd; /* optional: neat divider */
+}
+
+
+.info-title {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 32px;       /* increase size for title vibe */
+  font-weight: 700;
+  margin: 20px 0 10px 0;
+  text-align: center;     /* optional, center it */
+
+  background: linear-gradient(90deg, #0047AB, #00BFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  opacity: 0;
+  transform: translateY(10px); /* subtle slide up */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.info-container.visible .info-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.info-description {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px;
+  color: #555;
+  margin: 0 20px;
+  line-height: 1.6;
+}
+
+.info-container.red {
+  box-shadow: 0 8px 20px rgba(255, 0, 0, 0.6);
+  transition:   
+    box-shadow 0.4s cubic-bezier(.23,1,.32,1),  
+    transform 0.4s cubic-bezier(.23,1,.32,1);  
+}
+
+.info-container.red:hover,
+.info-container.red:active {
+  box-shadow: 0 16px 40px rgba(255, 0, 0, 0.9);
+  transform: scale(1.07);  
+}
+
+/* Info-title red gradient (normal, no silver) */
+.info-title.red {  
+  background: linear-gradient(90deg, #DE3163, #8A0303); /* cherry red to blood red */  
+  -webkit-background-clip: text;  
+  -webkit-text-fill-color: transparent;  
+  color: transparent;  
+}
+
+/* Below-button title silver → red shifting */
+.below-button-title.red {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+
+  background: linear-gradient(90deg, #b0b0b0, #d9d9d9, #ff4d4d, #ff0000);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  opacity: 0;
+  animation: fadeIn 3s ease forwards, silverRedShift 6s infinite alternate ease-in-out;
+  animation-delay: 0s, 3s;
+}
+
+/* ✅ Keyframes */
+@keyframes redShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes silverRedShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes popBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+  <div class="slideshow">
+
+    <div class="slide active"
+      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/istockphoto-186849963-612x612.jpg');"></div>
+    <div class="slide"
+      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/vivid-sunset-sky-stockcake.jpg');"></div>
+    <div class="slide"
+      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/images%20(64).jpeg');"></div>
+    <div class="slide"
+      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/images%20(62).jpeg');"></div>
+    <div class="slide"
+      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/images%20(66).jpeg');"></div>
+    <div class="slide"
+      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/images%20(67).jpeg');"></div>
+    <div class="slide"
+      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/images%20(68).jpeg');"></div>
+    <div class="slide"
+      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/images%20(69).jpeg');"></div>
+    <div class="slide"
+      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/images%20(70).jpeg');"></div>
+    <div class="slide"
+      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/Picsart_25-09-17_06-55-47-095.png');"></div>
+
+
+  <div class="shadow-overlay"></div>      
+
+<div class="top-content">      
+  <img class="top-center-image"      
+    src="https://raw.githack.com/OfficialDex/Bluesky-s-website/main/Picsart_25-09-17_06-55-47-095.png"      
+    alt="Center Logo">      
+
+  <div class="welcome-text">      
+    <span class="silver-gradient">Welcome to </span><span class="blue-gradient">BlueSky's Airways!</span>      
+  </div>      
+
+  <div class="subtitle-container">      
+    <span id="subtitle-text" class="subtitle-text silver-gradient"></span>      
+  </div>      
+
+  <!-- Capsule Button -->      
+  <button class="capsule-button">Get Started</button>      
+</div> <!-- closes .top-content -->
+</div> <!-- closes .slideshow -->
+
+<!-- Gradient Title Below Button (moved outside slideshow for spacing) -->
+<div class="below-button-title">Who we are?</div>
+
+<!-- Info container outside the slideshow -->
+<div class="info-container">
+  <img class="info-image" src="https://raw.githack.com/OfficialDex/Bluesky-s-website/main/Picsart_25-09-17_06-55-47-095.png" alt="Box Image">
+  <div class="info-title gradient-blue">BlueSky's Airways!!</div>
+  <div class="info-description">
+    We are a GeoFS-dedicated virtual airline, recognized with Emerald Lounge status in GCRP and ICAO. We are among the most actively developing airlines in the network
+  </div>
+</div>
+
+<div class="below-button-title red">What we offer?</div>
+
+<div class="info-container red visible">
+  <img class="info-image" src="https://raw.githack.com/OfficialDex/Bluesky-s-website/main/Screenshot_2025-09-13_113950-1.png" alt="Red Box Image">
+  <div class="info-title red">Safety and Excellence</div>
+  <div class="info-description">
+    We provide top-quality services to our valued customers, flying to multiple countries with strict safety standards. Even a small issue delays takeoff until fully resolved.
+  </div>
+</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+let currentIndex = 0;
+    setInterval(() => {
+      slides[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % slides.length;
+      slides[currentIndex].classList.add('active');
+    }, 4000);
+
+    const subtitles = [
+      `The <span class="gradient-red">Best</span> Virtual Airline`,
+      `Fly over 10+ <span class="gradient-gold">beautiful countries!</span>`,
+      `Enjoy <span class="gradient-pink">HD Scenery</span> without any annoying ad with our business class tickets`,
+      `Record for having Absolutely <span class="gradient-green">not a crash</span>`,
+      `Being in the list of <span class="gradient-purple">Top 5%</span> in GeoFS`,
+      `Multiple <span class="gradient-blue">Experienced Pilots</span> for the fleet!`,
+      `Over <span class="gradient-red">40+ airplanes</span> are always ready for your service`,
+      `Totally <span class="gradient-gold">free!</span>`
+    ];
+
+    const subtitleEl = document.getElementById('subtitle-text');
+    let subIndex = 0;
+
+    function showSubtitle() {
+      subtitleEl.style.opacity = 0;
+      subtitleEl.style.transform = 'translateY(-20px)';
+      setTimeout(() => {
+        subtitleEl.innerHTML = subtitles[subIndex];
+        subtitleEl.style.opacity = 1;
+        subtitleEl.style.transform = 'translateY(0)';
+        subIndex = (subIndex + 1) % subtitles.length;
+      }, 500);
+    }
+
+    showSubtitle();
+    setInterval(showSubtitle, 4000);
+    
+    
+    
+    document.addEventListener('DOMContentLoaded', () => {
+  const infoBox = document.querySelector('.info-container');
+  const title = infoBox.querySelector('.info-title');
+
+  // Only wrap words in spans ONCE
+  if (!title.hasAttribute('data-animated')) {
+    const words = title.textContent.trim().split(' ').map(word => `<span>${word}</span>`).join(' ');
+    title.innerHTML = words;
+    title.setAttribute('data-animated', 'true');
+  }
+
+  function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return rect.top <= window.innerHeight * 0.9;
+  }
+
+  function animateOnScroll() {
+    if (!infoBox.classList.contains('visible') && isInViewport(infoBox)) {
+      infoBox.classList.add('visible');
+      const spans = title.querySelectorAll('span');
+      spans.forEach((span, i) => {
+        span.style.animationDelay = `${i * 0.12}s`;
+      });
+      window.removeEventListener('scroll', animateOnScroll);
+    }
+  }
+
+  window.addEventListener('scroll', animateOnScroll);
+  animateOnScroll(); // In case it's already visible
+});
+
+  </script>
+</body>
+  </html>
