@@ -11,13 +11,13 @@
   margin: 0;
   font-family: 'Ubuntu', sans-serif;
   background: #f0f0f0;
-  min-height: 400vh; /* makes page scrollable */
+  min-height: 330vh; 
 }
 
     .slideshow {
   position: relative;
   width: 100%;
-  height: 300px; /* increase height so overlay and button have space */
+  height: 300px; 
   overflow: visible;
 }
 
@@ -53,14 +53,14 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; /* 300px */
+  height: 100%; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   padding-top: 10px;
   z-index: 10;
-  gap: 12px; /* space between elements */
+  gap: 12px; 
 }
 
 
@@ -203,14 +203,13 @@
       }
     }
 
-    /* Capsule Button */
 .capsule-button {
     position: absolute;
-    bottom: -18px; /* half of new height for equal distribution */
+    bottom: -18px; 
     left: 50%;
     transform: translateX(-50%) scale(1);
     transform-origin: center;
-    padding: 6px 40px; /* thinner vertical padding */
+    padding: 6px 40px; 
     background: linear-gradient(90deg, #00AEEF, #0047AB);
     color: white;
     font-size: 16px;
@@ -224,16 +223,16 @@
     animation: buttonFadeBounce 2s forwards;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     outline: none;
-    -webkit-tap-highlight-color: transparent; /* removes blue flash */
+    -webkit-tap-highlight-color: transparent; 
 }
 
 .capsule-button:hover {
-    transform: translateX(-50%) scale(4.95); /* noticeably bigger */
+    transform: translateX(-50%) scale(4.95); 
     box-shadow: 0 10px 25px rgba(0,0,0,0.35);
 }
 
 .capsule-button:active {
-    transform: translateX(-50%) scale(1.15); /* slightly smaller on click but bigger than normal */
+    transform: translateX(-50%) scale(1.15); 
     background: linear-gradient(90deg, #00AEEF, #0047AB);
 }
 
@@ -256,8 +255,8 @@
     }
     
 .below-button-title {
-  margin-top: 60px;   /* enough gap from button */
-  margin-bottom: 20px; /* smaller gap before info box */
+  margin-top: 60px;   
+  margin-bottom: 20px; 
   font-family: 'Ubuntu', sans-serif;
   font-size: 22px;
   font-weight: 700;
@@ -285,8 +284,8 @@
 }
 
 .info-container {
-  margin: 0 auto;   /* removes huge top margin */
-  margin-top: 20px; /* just enough under the title */
+  margin: 0 auto;   
+  margin-top: 20px; 
   width: 80%;
   max-width: 700px;
   background: #fff;
@@ -298,10 +297,10 @@
   transform: scale(0.95);
   transition: opacity 2.6s ease-out, transform 0.6s ease-out;
   will-change: opacity, transform;
-   box-shadow: 0 8px 20px rgba(0, 120, 255, 0.6); /* calm blue shadow */
+   box-shadow: 0 8px 20px rgba(0, 120, 255, 0.6); 
   transition: 
-    box-shadow 0.4s cubic-bezier(.23,1,.32,1), /* smooth shadow animation */
-    transform 0.4s cubic-bezier(.23,1,.32,1);  /* smooth grow animation */
+    box-shadow 0.4s cubic-bezier(.23,1,.32,1), 
+    transform 0.4s cubic-bezier(.23,1,.32,1);  
 }
 
 .info-container.visible {
@@ -312,25 +311,25 @@
 
 .info-container:hover,
 .info-container:active {
-  transform: scale(1.07); /* grows box up on hover/click */
-  box-shadow: 0 16px 40px rgba(0,180,255, 0.9); /* brighter blue, more spread */
+  transform: scale(1.07); 
+  box-shadow: 0 16px 40px rgba(0,180,255, 0.9); 
 }
 
 .info-image {
-  width: 100%;          /* full width of container */
-  max-height: 150px;    /* limit how tall it gets */
-  object-fit: cover;    /* crops it to look rectangular */
+  width: 100%;          
+  max-height: 150px;    
+  object-fit: cover;    
   display: block;
-  border-bottom: 1px solid #ddd; /* optional: neat divider */
+  border-bottom: 1px solid #ddd; 
 }
 
 
 .info-title {
   font-family: 'Ubuntu', sans-serif;
-  font-size: 32px;       /* increase size for title vibe */
+  font-size: 32px;       
   font-weight: 700;
   margin: 20px 0 10px 0;
-  text-align: center;     /* optional, center it */
+  text-align: center;     
 
   background: linear-gradient(90deg, #0047AB, #00BFFF);
   -webkit-background-clip: text;
@@ -339,7 +338,7 @@
   color: transparent;
 
   opacity: 0;
-  transform: translateY(10px); /* subtle slide up */
+  transform: translateY(10px); 
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
@@ -369,15 +368,13 @@
   transform: scale(1.07);  
 }
 
-/* Info-title red gradient (normal, no silver) */
 .info-title.red {  
-  background: linear-gradient(90deg, #DE3163, #8A0303); /* cherry red to blood red */  
+  background: linear-gradient(90deg, #DE3163, #8A0303); 
   -webkit-background-clip: text;  
   -webkit-text-fill-color: transparent;  
   color: transparent;  
 }
 
-/* Below-button title silver → red shifting */
 .below-button-title.red {
   margin-top: 60px;
   margin-bottom: 20px;
@@ -397,7 +394,6 @@
   animation-delay: 0s, 3s;
 }
 
-/* ✅ Keyframes */
 @keyframes redShift {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
@@ -406,6 +402,104 @@
 @keyframes silverRedShift {
   0% { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
+}
+
+
+/* ts is purple↓ */
+.info-container.purple {
+  box-shadow: 0 8px 20px rgba(90, 0, 180, 0.8); /* medium-deep purple glow */
+  transition:   
+    box-shadow 0.4s cubic-bezier(.23,1,.32,1),  
+    transform 0.4s cubic-bezier(.23,1,.32,1);  
+}
+
+.info-container.purple:hover,
+.info-container.purple:active {
+  box-shadow: 0 16px 40px rgba(120, 0, 220, 0.85); /* slightly brighter, still elegant on hover */
+  transform: scale(1.07);  
+}
+
+
+.info-title.purple {  
+  background: linear-gradient(90deg, #4B0082, #8A2BE2); 
+  -webkit-background-clip: text;  
+  -webkit-text-fill-color: transparent;  
+  color: transparent;  
+}
+
+.below-button-title.purple {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+
+  background: linear-gradient(90deg, #b0b0b0, #d9d9d9, #8000ff, #b366ff);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  opacity: 0;
+  animation: fadeIn 3s ease forwards, silverPurpleShift 6s infinite alternate ease-in-out;
+  animation-delay: 0s, 3s;
+}
+
+@keyframes purpleShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes silverPurpleShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* goldie */
+.below-button-title.gold {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #b0b0b0, #d9d9d9, #ffd700, #ffea00);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  opacity: 0;
+  animation: fadeIn 3s ease forwards, silverGoldShift 6s infinite alternate ease-in-out;
+  animation-delay: 0s, 3s;
+}
+
+@keyframes silverGoldShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.social-links {
+  display: flex;             
+  justify-content: center;   
+  gap: 15px;                 
+  margin-top: 15px;          
+  opacity: 1;               /* ensure visible */
+  z-index: 20;              /* above other elements if needed */
+}
+
+.social-icon {
+  width: 54px;
+  height: 54px;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  opacity: 1;               /* force visibility */
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
 }
 
 @keyframes fadeInUp {
@@ -460,9 +554,6 @@
       style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/images%20(69).jpeg');"></div>
     <div class="slide"
       style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/images%20(70).jpeg');"></div>
-    <div class="slide"
-      style="background-image: url('https://raw.githack.com/OfficialDex/Bluesky-s-website/main/Picsart_25-09-17_06-55-47-095.png');"></div>
-
 
   <div class="shadow-overlay"></div>      
 
@@ -479,15 +570,14 @@
     <span id="subtitle-text" class="subtitle-text silver-gradient"></span>      
   </div>      
 
-  <!-- Capsule Button -->      
+  
   <button class="capsule-button">Get Started</button>      
-</div> <!-- closes .top-content -->
-</div> <!-- closes .slideshow -->
+</div> 
+</div> 
 
-<!-- Gradient Title Below Button (moved outside slideshow for spacing) -->
+
 <div class="below-button-title">Who we are?</div>
 
-<!-- Info container outside the slideshow -->
 <div class="info-container">
   <img class="info-image" src="https://raw.githack.com/OfficialDex/Bluesky-s-website/main/Picsart_25-09-17_06-55-47-095.png" alt="Box Image">
   <div class="info-title gradient-blue">BlueSky's Airways!!</div>
@@ -506,6 +596,28 @@
   </div>
 </div>
 
+<div class="below-button-title purple">What we have?</div>
+
+<div class="info-container purple visible">
+  <img class="info-image" src="https://raw.githack.com/OfficialDex/Bluesky-s-website/main/Screenshot_2025-08-25_111822.png" alt="Red Box Image">
+  <div class="info-title purple">Our hub and fleet</div>
+  <div class="info-description">
+    We operate 40 aircraft, ranging from short-haul to long-haul flights, with our hub at Ninoy Aquino International Airport. We serve destinations including the United States, Hong Kong, France, Thailand, the United Kingdom, Australia, Canada, Italy, Singapore, Vietnam, Indonesia, and Austria, with cargo planes expected by 2026.
+  </div>
+</div>
+
+<div class="below-button-title gold">Let's start with your journey!</div>
+
+<!-- Social Buttons -->
+<div class="social-links">
+  <a href="https://dsc.gg/blueskyairways" target="_blank">
+    <img src="https://raw.githack.com/OfficialDex/Bluesky-s-website/main/Picsart_25-09-25_10-15-33-786.png" alt="Discord" class="social-icon">
+  </a>
+  <a href="https://youtube.com/@blueaviation024?si=sbfNQyv1gxcC2Iea" target="_blank">
+    <img src="https://raw.githack.com/OfficialDex/Bluesky-s-website/main/Picsart_25-09-25_10-19-28-443.png" alt="YouTube" class="social-icon">
+  </a>
+</div>
+
   <script>
     const slides = document.querySelectorAll('.slide');
 let currentIndex = 0;
@@ -517,9 +629,9 @@ let currentIndex = 0;
 
     const subtitles = [
       `The <span class="gradient-red">Best</span> Virtual Airline`,
-      `Fly over 10+ <span class="gradient-gold">beautiful countries!</span>`,
+      `Fly over multiple <span class="gradient-gold">beautiful countries!</span>`,
       `Enjoy <span class="gradient-pink">HD Scenery</span> without any annoying ad with our business class tickets`,
-      `Record for having Absolutely <span class="gradient-green">not a crash</span>`,
+      `Record for having <span class="gradient-green">not a single crash in history</span>`,
       `Being in the list of <span class="gradient-purple">Top 5%</span> in GeoFS`,
       `Multiple <span class="gradient-blue">Experienced Pilots</span> for the fleet!`,
       `Over <span class="gradient-red">40+ airplanes</span> are always ready for your service`,
@@ -549,7 +661,6 @@ let currentIndex = 0;
   const infoBox = document.querySelector('.info-container');
   const title = infoBox.querySelector('.info-title');
 
-  // Only wrap words in spans ONCE
   if (!title.hasAttribute('data-animated')) {
     const words = title.textContent.trim().split(' ').map(word => `<span>${word}</span>`).join(' ');
     title.innerHTML = words;
@@ -573,9 +684,9 @@ let currentIndex = 0;
   }
 
   window.addEventListener('scroll', animateOnScroll);
-  animateOnScroll(); // In case it's already visible
+  animateOnScroll(); 
 });
 
   </script>
 </body>
-  </html>
+</html>
