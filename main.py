@@ -144,7 +144,7 @@ def proxy_user(username):
                 else:
                     scripts_content+=content+"\n"
         bm_json = json.dumps(bookmarklets)
-        injection=f"""
+        injection = f"""
 <script>
 window.PROXY_USERNAME={json.dumps(username)};
 window.PROXY_BOOKMARKLETS = {bm_json};
