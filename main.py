@@ -145,13 +145,13 @@ def proxy_user(username):
                     scripts_content+=content+"\n"
         bm_json = json.dumps(bookmarklets)
         injection=f"""
-        <script>
-        window.PROXY_USERNAME={json.dumps(username)};
-        window.PROXY_BOOKMARKLETS = {bm_json};
-        window.runProxyBookmarklet = function(i){{ try{{ (new Function(window.PROXY_BOOKMARKLETS[i]))(); }}catch(e){{console.error(e);} }};
-        (function(){{{scripts_content}}})();
-        </script>
-        """
+<script>
+window.PROXY_USERNAME={json.dumps(username)};
+window.PROXY_BOOKMARKLETS = {bm_json};
+window.runProxyBookmarklet = function(i){{{{ try{{{{ (new Function(window.PROXY_BOOKMARKLETS[i]))(); }}}}catch(e){{{{console.error(e);}}}} }}};
+(function(){{{{{scripts_content}}}}})();
+</script>
+"""
         overlay=f"""<div style="position:fixed;bottom:10px;right:10px;background:#000;color:#fff;padding:5px;border-radius:4px;z-index:2147483647;">Viewing as: {username}</div>"""
         modified_html=html.replace('</body>',overlay+injection+'</body>')
         return Response(modified_html,content_type='text/html')
@@ -177,4 +177,4 @@ def get_plan_protected(username):
         return jsonify({"error":"no_plan"}), 404
     return send_file(plan_path, mimetype='application/json', as_attachment=True, download_name=f"{username}.json")
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)__name__
+    app.run(host="0.0.0.0", port=5000, debug=True)
