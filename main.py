@@ -144,14 +144,18 @@ def proxy_user(username):
                 else:
                     scripts_content+=content+"\n"
         bm_json = json.dumps(bookmarklets)
-        injection = f"""
+        injection = """
 <script>
-window.PROXY_USERNAME={json.dumps(username)};
+window.PROXY_USERNAME={username};
 window.PROXY_BOOKMARKLETS = {bm_json};
-window.runProxyBookmarklet = function(i){{{{ try{{{{ (new Function(window.PROXY_BOOKMARKLETS[i]))(); }}}}catch(e){{{{console.error(e);}}}} }}};
-(function(){{{{{scripts_content}}}}})();
+window.runProxyBookmarklet = function(i){{ try{{ (new Function(window.PROXY_BOOKMARKLETS[i]))(); }}catch(e){{ console.error(e); }} }};
+(function(){{ {scripts_content} }})();
 </script>
-"""
+""".format(
+    username=json.dumps(username),
+    bm_json=bm_json,
+    scripts_content=scripts_content
+)
         overlay=f"""<div style="position:fixed;bottom:10px;right:10px;background:#000;color:#fff;padding:5px;border-radius:4px;z-index:2147483647;">Viewing as: {username}</div>"""
         modified_html=html.replace('</body>',overlay+injection+'</body>')
         return Response(modified_html,content_type='text/html')
